@@ -42,6 +42,7 @@ android {
         applicationId "com.example.chatter"
         minSdkVersion 16
         targetSdkVersion 29
+        multidexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

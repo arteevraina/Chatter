@@ -14,17 +14,41 @@ Widget AppBarMain(BuildContext context) {
 Widget TextFieldMain(
     {BuildContext context,
     String hintText,
-    TextEditingController inputController}) {
-  return TextField(
+    TextEditingController inputController,
+    Function validator,
+    bool isPassword}) {
+  return TextFormField(
+    obscureText: isPassword,
+    validator: validator,
     controller: inputController,
     decoration: InputDecoration(
       hintStyle: mediumTextStyle(),
       hintText: hintText,
-      enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue),
-          borderRadius: BorderRadius.all(Radius.circular(30))),
-      focusedBorder: OutlineInputBorder(
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          style: BorderStyle.solid,
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.red),
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.blue),
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.pink,
+          width: 2,
+        ),
         borderRadius: BorderRadius.all(
           Radius.circular(30),
         ),
