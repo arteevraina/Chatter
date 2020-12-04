@@ -1,3 +1,5 @@
+import 'package:chatter/services/auth.dart';
+import 'package:chatter/services/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:chatter/constants/styles.dart';
@@ -8,6 +10,34 @@ Widget AppBarMain(BuildContext context) {
       "Chatter",
       style: GoogleFonts.majorMonoDisplay(),
     ),
+  );
+}
+
+Widget AppBarChatRoom(BuildContext context) {
+  return AppBar(
+    title: Text(
+      "Chatter",
+      style: GoogleFonts.majorMonoDisplay(),
+    ),
+    actions: [
+      GestureDetector(
+        onTap: () {
+          AuthMethods().signOut();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Authenticate(),
+            ),
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Icon(
+            Icons.logout,
+          ),
+        ),
+      ),
+    ],
   );
 }
 

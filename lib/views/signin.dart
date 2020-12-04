@@ -4,6 +4,9 @@ import 'package:chatter/constants/styles.dart';
 import 'package:chatter/constants/validators.dart';
 
 class SignIn extends StatefulWidget {
+  final Function toggle;
+  SignIn(this.toggle);
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -35,6 +38,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               TextFieldMain(
+                isPassword: false,
                 validator: emailValidator,
                 context: context,
                 hintText: "Email",
@@ -44,6 +48,7 @@ class _SignInState extends State<SignIn> {
                 height: 12,
               ),
               TextFieldMain(
+                isPassword: true,
                 validator: passwordValidator,
                 context: context,
                 hintText: "Password",
@@ -82,9 +87,19 @@ class _SignInState extends State<SignIn> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Don't have an account? ", style: mediumTextStyle()),
-                  Text(
-                    "Register now",
-                    style: mediumTextStyle(),
+                  GestureDetector(
+                    onTap: () {
+                      widget.toggle();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8,
+                      ),
+                      child: Text(
+                        "Register now",
+                        style: mediumTextStyle(),
+                      ),
+                    ),
                   ),
                 ],
               ),

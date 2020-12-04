@@ -1,10 +1,15 @@
 import 'package:chatter/services/auth.dart';
+import 'package:chatter/services/usersRepository.dart';
+import 'package:chatter/views/chatroomscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:chatter/widgets/widget.dart';
 import 'package:chatter/constants/styles.dart';
 import 'package:chatter/constants/validators.dart';
 
 class SignUp extends StatefulWidget {
+  final Function toggle;
+  SignUp(this.toggle);
+
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -12,13 +17,14 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   bool isLoading = false;
   AuthMethods authMethods = AuthMethods();
+  UsersRepository _usersRepository = UsersRepository();
 
   final formKey = GlobalKey<FormState>();
   TextEditingController _userNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  signUp() {
+  signUp() async {
     if (formKey.currentState.validate()) {
       setState(() {
         isLoading = true;
@@ -26,8 +32,14 @@ class _SignUpState extends State<SignUp> {
       String email = _emailController.text;
       String password = _passwordController.text;
       String userName = _userNameController.text;
-      var result = authMethods.signUpWithEmailAndPassword(email, password);
-      print(result);
+      await authMethods.signUpWithEmailAndPassword(email, password);
+
+      _usersRepository.postUser(email: email, userName: userName);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => ChatRoom()),
+      );
     }
   }
 
@@ -125,9 +137,17 @@ class _SignUpState extends State<SignUp> {
                       children: [
                         Text("Already have an account? ",
                             style: mediumTextStyle()),
-                        Text(
-                          "SignUp now",
-                          style: mediumTextStyle(),
+                        GestureDetector(
+                          onTap: () {
+                            widget.toggle();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 8),
+                            child: Text(
+                              "SignUp now",
+                              style: mediumTextStyle(),
+                            ),
+                          ),
                         ),
                       ],
                     ),
