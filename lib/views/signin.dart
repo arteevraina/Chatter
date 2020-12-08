@@ -12,8 +12,13 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  signIn() {
+    print(formKey.currentState.validate());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,89 +29,97 @@ class _SignInState extends State<SignIn> {
           height: MediaQuery.of(context).size.height - 50,
           alignment: Alignment.bottomCenter,
           padding: EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 300.0,
-                height: 200.0,
-                child: FittedBox(
-                  child: Text(
-                    "Chatter",
-                    style: buttonTextStyle(Colors.black),
-                  ),
-                ),
-              ),
-              TextFieldMain(
-                isPassword: false,
-                validator: emailValidator,
-                context: context,
-                hintText: "Email",
-                inputController: _emailController,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              TextFieldMain(
-                isPassword: true,
-                validator: passwordValidator,
-                context: context,
-                hintText: "Password",
-                inputController: _passwordController,
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 15),
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Forgot Password ?",
-                  style: mediumTextStyle(),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              LoginButton(
-                context: context,
-                buttonText: "Sign In",
-                textColor: Colors.white,
-                backgroundColor: Colors.pink,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              LoginButton(
-                context: context,
-                buttonText: "Sign In with Google",
-                textColor: Colors.white,
-                backgroundColor: Colors.red,
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account? ", style: mediumTextStyle()),
-                  GestureDetector(
-                    onTap: () {
-                      widget.toggle();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8,
-                      ),
-                      child: Text(
-                        "Register now",
-                        style: mediumTextStyle(),
-                      ),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 300.0,
+                  height: 200.0,
+                  child: FittedBox(
+                    child: Text(
+                      "Chatter",
+                      style: buttonTextStyle(Colors.black),
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              )
-            ],
+                ),
+                TextFieldMain(
+                  isPassword: false,
+                  validator: emailValidator,
+                  context: context,
+                  hintText: "Email",
+                  inputController: _emailController,
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                TextFieldMain(
+                  isPassword: true,
+                  validator: passwordValidator,
+                  context: context,
+                  hintText: "Password",
+                  inputController: _passwordController,
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 15),
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Forgot Password ?",
+                    style: mediumTextStyle(),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    signIn();
+                  },
+                  child: LoginButton(
+                    context: context,
+                    buttonText: "Sign In",
+                    textColor: Colors.white,
+                    backgroundColor: Colors.pink,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                LoginButton(
+                  context: context,
+                  buttonText: "Sign In with Google",
+                  textColor: Colors.white,
+                  backgroundColor: Colors.red,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account? ", style: mediumTextStyle()),
+                    GestureDetector(
+                      onTap: () {
+                        widget.toggle();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                        child: Text(
+                          "Register now",
+                          style: mediumTextStyle(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 50,
+                )
+              ],
+            ),
           ),
         ),
       ),

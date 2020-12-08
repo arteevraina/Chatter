@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
       title: 'Chatter',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Search(),
+      home: Authenticate(),
     );
   }
 }

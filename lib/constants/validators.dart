@@ -27,6 +27,10 @@ Function(String) emailValidator = (String email) {
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regExp = RegExp(p);
 
+  if (email.isEmpty) {
+    return "Please Enter your Email";
+  }
+
   if (!regExp.hasMatch(email)) {
     return "Email is not valid";
   }

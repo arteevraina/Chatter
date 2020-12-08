@@ -144,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                           child: Container(
                             padding: EdgeInsets.symmetric(vertical: 8),
                             child: Text(
-                              "SignUp now",
+                              "SignIn now",
                               style: mediumTextStyle(),
                             ),
                           ),
